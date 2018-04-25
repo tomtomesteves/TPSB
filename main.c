@@ -7,6 +7,7 @@ int main(int argc, char const *argv[]) {
   in = fopen(,"r");
   out = fopen(,"w");
   fprintf(out, "%s\n", );
+  uighasghuiashg
   teseeeee
   return 0;
 }
