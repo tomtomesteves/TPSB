@@ -6,6 +6,6 @@ int main(int argc, char const *argv[]) {
   in = fopen(,"r");
   out = fopen(,"w");
   fprintf(out, "%s\n", );
-
+  teseeeee
   return 0;
 }
