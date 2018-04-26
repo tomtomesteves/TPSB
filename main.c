@@ -4,6 +4,7 @@
 
 int main(int argc, char const *argv[]) {
   FILE* in,out;
+  //meupau
   in = fopen(,"r");
   out = fopen(,"w");
   fprintf(out, "%s\n", );
