@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-isfgasga
+testee 
 int main(int argc, char const *argv[]) {
   FILE* in,out;
   in = fopen(,"r");
