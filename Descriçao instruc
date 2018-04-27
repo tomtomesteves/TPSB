@@ -1,0 +1,28 @@
+0 reg : stop, jump, call, return
+stop :   Zero(11)
+return : zero(11)
+jump :   Endereço(11(9 menos sig))
+call :   endereço(11(9 menos sig))
+
+1 reg : load, store, read, write, jmpz, jmpn, push, pop, load_s, store_s,loadc, copytop
+load  : reg(2)endereço(9)
+store : reg(2)endereço(9)
+jmpz  : reg1(2)endereço(9)
+jmpn  : reg1(2)endereço(9)
+load_s: reg(2)endereço(9)
+store_s:reg(2)endereço(9)
+loadc : reg(2)endereço(9)
+read  : reg(11(2 menos sig))
+write : reg(11) ???
+push  : reg(11(2 menos sig))
+pop   : reg(11(2 menos sig))
+copytop:reg(11(2 menos sig))
+
+2 reg : add, subtract, multiply, divide, move, loadi, storei
+add   :     reg1(2)reg2(9(2 menos sig))
+subtract :  reg1(2)reg2(9(2 menos sig))
+multiply :  reg1(2)reg2(9(2 menos sig))
+divide   :  reg1(2)reg2(9(2 menos sig))
+move     :  reg1(2)reg2(9(2 menos sig))
+loadi    :  reg1(2)reg2(9(2 menos sig))
+storei   :  reg1(2)reg2(9(2 menos sig))
