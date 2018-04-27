@@ -4,36 +4,105 @@
 
 #include "opcode.h"
 
-
+int aux;
 
 int opcodeDecode(char* instruction){
-  if(!strcmp(instruction,      "stop"))     return 0;           // Encerra o programa, através da escrita da flag halt-bit.
-  else if(!strcmp(instruction, "load"))     return 1;           // Carrega um dado da memória para um registrador
-  else if(!strcmp(instruction, "store"))    return 2;           // Escreve o valor de um registrador em um endereço de memória
-  else if(!strcmp(instruction, "read"))     return 3;           // Armazena o valor da entrada digitada no Registrador 1.
-  else if(!strcmp(instruction, "write"))    return 4;           // Imprime o valor do registrado no console
-  else if(!strcmp(instruction, "add"))      return 5;           // Faz a soma dos valores de dois registradores e escreve no primeiro registrador.
-  else if(!strcmp(instruction, "subtract")) return 6;           // Faz a subtração dos valores de dois registradores e escreve no primeiro registrador
-  else if(!strcmp(instruction, "multiply")) return 7;           // Faz a multiplicação dos valores de dois registradores e escreve no primeiro registrador.
-  else if(!strcmp(instruction, "divide"))   return 8;           // Faz a divisão dos valores de dois registradores e escreve no primeiro registrador
-  else if(!strcmp(instruction, "jump"))     return 9;           // Pula para a instrução contida no endereço de memória especificado.
-  else if(!strcmp(instruction, "jmpz"))     return 10;          // Pula para a instrução contida no endereço de memória especificado, caso o valor contido no registrador seja igual a zero.
-  else if(!strcmp(instruction, "jmpn"))     return 11;          // Pula para a instrução contida no endereço de memória especificado, caso o valor contido no registrador seja menor que zero.
-  else if(!strcmp(instruction, "move"))     return 12;          // Move o valor de um registrador para o outro
-  else if(!strcmp(instruction, "push"))     return 13;          // Insere um valor contido em um registrador na pilha.
-  else if(!strcmp(instruction, "pop"))      return 14;          // Remove o topo da pilha e o coloca em um registrador.
-  else if(!strcmp(instruction, "call"))     return 15;          // Chama o procedimento que está contido no endereço de memória especificado. Empilha o endereço da próxima instrução a ser chamada (pc, antes do redirecionamento) para ser usado pelo return posteriormente.
-  else if(!strcmp(instruction, "return"))   return 32768;       // Encerra um procedimento e retorna para endereço especificado pelo valor no topo da pilha. ATENÇÃO: uma função chamada que insere elementos na pilha deve obrigatoriamente removê-los antes do return.
-  else if(!strcmp(instruction, "load_s"))   return 17;          // Carrega um dado na pilha diretametne.
-  else if(!strcmp(instruction, "store_s"))  return 18;          // Quando uma sub-rotina vai executar e possui argumento, ela precisará salvar o argumento de um registrador na pilha. Para fazer isso, deve-se utilizar a instrução "store_s".
-  else if(!strcmp(instruction, "loadc"))    return 19;          // Carrega uma constante de 9 bits (Notação Complemento 2) em um registrador. A constante é armazenada em um registrador.
-  else if(!strcmp(instruction, "loadi"))    return 20;          // Carregar dados da pilha em um registrador 1 onde o endereço dos dados na pilha está no registrador 2.
-  else if(!strcmp(instruction, "storei"))   return 21;          // Armazena os dados do registrador 1 na pilha, onde o endereço na pilha está no registrador 2
-  else if(!strcmp(instruction, "copytop"))  return 22;          // Carrega no registrador 1 o endereço do topo da pilha (ou seja, o endereço contido no ponteiro superior, não os dados no topo da pilha).
-  else return -1;                                                // !!! instrução nao existe
+  if(!strcmp(instruction,      "stop")){
+    return 0;
+  }
+  else if(!strcmp(instruction, "load")){
+    aux = 1;
+    return 2;
+  }
+  else if(!strcmp(instruction, "store")){
+    aux = 2;
+    return 2;
+  }
+  else if(!strcmp(instruction, "read")){
+    aux =  3;
+    return 3
+  }
+  else if(!strcmp(instruction, "write")){
+    aux = 4;
+    return 3;
+  }
+  else if(!strcmp(instruction, "add")) {
+    aux = 5;
+    return 4;
+  }
+  else if(!strcmp(instruction, "subtract")) {
+    aux = 6;
+    return 4;
+  }
+  else if(!strcmp(instruction, "multiply")) {
+    aux = 7;
+    return 4;
+  }
+  else if(!strcmp(instruction, "divide")) {
+    aux = 8;
+    return 4;
+  }
+  else if(!strcmp(instruction, "jump")) {
+    aux = 9;
+    return 1;
+  }
+  else if(!strcmp(instruction, "jmpz")) {
+    aux = 10;
+    return 2;
+  }
+  else if(!strcmp(instruction, "jmpn")) {
+    aux = 11;
+    return 2;
+  }
+  else if(!strcmp(instruction, "move")) {
+    aux = 12;
+    return 4;
+  }
+  else if(!strcmp(instruction, "push")) {
+    aux = 13;
+    return 3;
+  }
+  else if(!strcmp(instruction, "pop"))      {
+    aux = 14;
+    return 3;
+  }
+  else if(!strcmp(instruction, "call"))     {
+    aux = 15;
+    return 1;
+  }
+  else if(!strcmp(instruction, "return"))   {
+    aux = 32768;
+    return 0;
+  }
+  else if(!strcmp(instruction, "load_s"))   {
+    aux = 17;
+    return 2;
+  }
+  else if(!strcmp(instruction, "store_s"))  {
+    aux = 18;
+    return 2;
+  }
+  else if(!strcmp(instruction, "loadc"))    {
+    aux = 19;
+    return 2;
+  }
+  else if(!strcmp(instruction, "loadi"))    {
+    aux = 20;
+    return 4;
+  }
+  else if(!strcmp(instruction, "storei"))   {
+    aux = 21;
+    return 4;
+  }
+  else if(!strcmp(instruction, "copytop"))  {
+    aux = 22;
+    return 3;
+  }
+  else return -1;
 }
 
-char *IntToBinOP(int n){
+char *IntToBinOP(){
+  int n = aux;
   int c, d, count;
   char *pointer;
   count = 0;

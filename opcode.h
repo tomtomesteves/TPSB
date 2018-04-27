@@ -5,6 +5,6 @@
 int opcodeDecode(char* instruction);
 
 //tranforma int em binario
-char *IntToBinOP(int a);
+char *IntToBinOP();
 
 #endif
