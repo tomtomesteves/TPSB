@@ -37,7 +37,7 @@ char *IntToBinOP(int n){
   int c, d, count;
   char *pointer;
   count = 0;
-  pointer = (char*)malloc(5+1);
+  pointer = (char*)malloc(5);
   if (pointer == NULL)
     exit(EXIT_FAILURE);
   for (c = 4 ; c >= 0 ; c--){
@@ -48,6 +48,5 @@ char *IntToBinOP(int n){
       *(pointer+count) = 0 + '0';
     count++;
   }
-  *(pointer+count) = '\0';
   return  pointer;
 }
