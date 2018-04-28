@@ -1,6 +1,6 @@
 #ifndef LISTA_H
 #define LISTA_H
-
+//LISTA DE LABELS -
 typedef struct TipoItem{
   char *label;
   int adress;
@@ -18,19 +18,16 @@ typedef struct lista {
   apontador primeiro, ultimo;
 }TipoLista;
 
-//inicializa a lista a
+//inicializa a lista, recebendo um ponteiro para TipoLista
 void inicializa_lista(TipoLista *lista);
 
-//insere vertice v na lista a
+//insere uma label e seu endereço na lista
 void insere_lista(TipoLista* lista,int adress, char* label);
 
-//Remove da lista a celula aux
-void remove_lista(TipoLista* lista,apontador aux,apontador anterior);
+//Retorna o endereço associado a label fornecida. Caso não encontre a label, retorna -1
+void pesquisa_lista(TipoLista *lista,char* label);
 
-//imprime a lista
-void imprime_lista(TipoLista* lista);
-
-//free parav vetor de listas de tamanho n
+//Desaloca os elementos da lista
 void free_lista(TipoLista* lista);
 
 #endif
