@@ -1,6 +1,6 @@
 #ifndef LISTA_H
 #define LISTA_H
-//LISTA DE LABELS -
+//LISTA DE LABELS
 typedef struct TipoItem{
   char *label;
   int adress;
