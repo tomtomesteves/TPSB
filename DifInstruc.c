@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "DifInstruc.h"
-#include "regDecode.h"
 
 char* DifInstruction(int flag, char* operandos, int label,TipoLista* lista){
   if (flag == 0) {      //Zero(11)
@@ -42,7 +41,7 @@ char* DifInstruction(int flag, char* operandos, int label,TipoLista* lista){
     else {
       char* aux;
       aux = strtok(operandos,' ');
-      op = decodeReg(aux,1);
+      op = decodeReg(aux,0);
       aux = strtok(operandos,'\0');
       int a = (int)aux;
       aux = intToBin(a);
@@ -61,7 +60,7 @@ char* DifInstruction(int flag, char* operandos, int label,TipoLista* lista){
   else if (flag == 4) { //reg1(2)reg2(9(2 menos sig))
     char* aux;
     aux = strtok(operandos,' ');
-    op = decodeReg(aux,1);
+    op = decodeReg(aux,0);
     aux = strtok(operandos,'\0');
     char* aux2;
     aux2 = decodeReg(aux,2);
