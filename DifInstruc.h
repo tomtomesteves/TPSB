@@ -1,7 +1,8 @@
-#ifndef DifInstruc_H
+ #ifndef DifInstruc_H
 #define DifInstruc_H
 
-//retorna um numero para cada tipo de instruçao( 1 )
-??? DifInstruction(int flag; char* instruction);
+//retorna a decodificacao dos oprerandos da instrucao
+// recebe apenas os capos dos oprandos sem o primeiro espaco
+char* DifInstruction(int flag; char* operandos);
 
 #endif
