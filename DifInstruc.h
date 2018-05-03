@@ -3,6 +3,6 @@
 
 //retorna a decodificacao dos oprerandos da instrucao
 // recebe apenas os capos dos oprandos sem o primeiro espaco
-char* DifInstruction(int flag; char* operandos);
+char* DifInstruction(int flag; char* operandos,TipoLista *lista);
 
 #endif

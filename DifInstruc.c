@@ -4,7 +4,7 @@
 
 #include "DifInstruc.h"
 
-char* DifInstruction(int flag, char* operandos, int label,TipoLista* lista){
+char* DifInstruction(int flag, char* operandos,TipoLista* lista){
   if (flag == 0) {      //Zero(11)
     char* s;
     strcpy(s,"00000000000");

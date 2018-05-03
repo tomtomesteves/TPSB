@@ -4,9 +4,8 @@
 
 #include "opcode.h"
 
-int aux;
 
-int opcodeDecode(char* instruction){
+int opcodeDecode(char* instruction,int *aux){
   if(!strcmp(instruction,      "stop")){
     return 0;
   }
@@ -20,7 +19,7 @@ int opcodeDecode(char* instruction){
   }
   else if(!strcmp(instruction, "read")){
     aux =  3;
-    return 3
+    return 3;
   }
   else if(!strcmp(instruction, "write")){
     aux = 4;
@@ -101,8 +100,7 @@ int opcodeDecode(char* instruction){
   else return -1;
 }
 
-char *IntToBinOP(){
-  int n = aux;
+char *IntToBinOP(int *n){
   int c, d, count;
   char *pointer;
   count = 0;
