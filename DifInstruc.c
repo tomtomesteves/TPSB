@@ -11,59 +11,58 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     strcat(s,"\0");
     return s;
   }
+
   else if (flag == 1) { //Endereco(11(9 menos sig))
     char* op;
-    if(label){
-      int aux;
-      if(aux = pesquisa_lista(lista,operandos) != -1){
-        op = intToBin(aux);
-        strcat(op,'\0');
-        return op;
-      }
+    int aux;
+    if(aux = pesquisa_lista(lista,operandos) != -1){
+      op = intToBin(aux,11);
+      strcat(op,'\0');
+      return op;
     }
     else {
-      int aux = int(operandos);//nao sei se funciona
-      op = intToBin(aux);
+      aux = atoi(operandos);
+      op = intToBin(aux,11);
+      strcat(op,'\0');
+      return op;
     }
-    strcat(op,'\0');
-    return op;
   }
+
   else if (flag == 2) { //reg(2)endereço(9)
     char* op;
-    if(label){
-      int aux;
-      if(aux = pesquisa_lista(lista,operandos) != -1){
-        op = intToBin(aux);
-        strcat(op,'\0');
-        return op;
-      }
+    char* aux2;
+    int aux;
+    op = strtok(operandos," ");
+    op = decodeReg(op,0);
+    aux2 = strtok(NULL," \0;");
+
+    if(aux = pesquisa_lista(lista,aux2) != -1){
+      aux2 = intToBin(aux,9);
+      strcat(op,aux2);
+      strcat(op,'\0');
+      return op;
     }
-    else {
-      char* aux;
-      aux = strtok(operandos,' ');
-      op = decodeReg(aux,0);
-      aux = strtok(operandos,'\0');
-      int a = (int)aux;
-      aux = intToBin(a);
-      strcat(op,aux);
+    else{
+      aux = atoi(aux2);
+      aux2 = intToBin(aux,9);
+      strcat(op,aux2);
+      strcat(op,"\0");
+      return op;
     }
-    strcat(op,'\0');
-    return op;
   }
+
   else if (flag == 3) { //reg(11(2 menos sig))
     char* op;
     op = decodeReg(op,1);
-    int aux = (int)op;
-    op = intToBin(aux);
     return op;
   }
+
   else if (flag == 4) { //reg1(2)reg2(9(2 menos sig))
     char* aux;
     aux = strtok(operandos,' ');
     op = decodeReg(aux,0);
-    aux = strtok(operandos,'\0');
-    char* aux2;
-    aux2 = decodeReg(aux,2);
+    aux = strtok(NULL,' \0;');
+    aux = decodeReg(aux,2);
     strcat(op,aux2);
     strcat(op,'\0');
     return op
@@ -71,14 +70,14 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
 }
 
 
-char *IntToBin(int n){
+char *IntToBin(int n,int tamanho){
   int c, d, count;
   char *pointer;
   count = 0;
-  pointer = (char*)malloc(12);
+  pointer = (char*)malloc(tamanho+1);
   if (pointer == NULL)
     exit(EXIT_FAILURE);
-  for (c = 12 ; c >= 0 ; c--){
+  for (c = tamanho ; c >= 0 ; c--){
     d = n >> c;
     if (d & 1)
       *(pointer+count) = 1 + '0';
