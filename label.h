@@ -1,20 +1,19 @@
-#ifndef LISTA_H
-#define LISTA_H
+#ifndef LABEL_H
+#define LABEL_H
 //LISTA DE LABELS
 typedef struct TipoItem{
   char *label;
   int adress;
 }TipoItem;
 
-typedef TipoCelula* apontador;
+typedef struct Celula* apontador;
 
-typedef struct node{
+typedef struct Celula{
   TipoItem item;
   apontador prox;
-}TipoCelula;
+}Celula;
 
-typedef struct lista {
-  int size;
+typedef struct TipoLista{
   apontador primeiro, ultimo;
 }TipoLista;
 
@@ -25,7 +24,7 @@ void inicializa_lista(TipoLista *lista);
 void insere_lista(TipoLista* lista,int adress, char* label);
 
 //Retorna o endereço associado a label fornecida. Caso não encontre a label, retorna -1
-void pesquisa_lista(TipoLista *lista,char* label);
+int pesquisa_lista(TipoLista *lista,char* label);
 
 //Desaloca os elementos da lista
 void free_lista(TipoLista* lista);

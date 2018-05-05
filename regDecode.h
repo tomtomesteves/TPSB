@@ -1,4 +1,3 @@
-
 #ifndef REGDECODE_H
 #define REGDECODE_H
 

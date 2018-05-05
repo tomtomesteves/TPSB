@@ -1,26 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "lista.h"
+#include "label.h"
 
 void inicializa_lista(TipoLista *lista){ //aloca celula cabeça
-    lista.size = 0;
-    lista->primeiro = (apontador)malloc(sizeof(TipoCelula));
-    lista->primeiro->prox = NULL;
+    lista->primeiro = (apontador)malloc(sizeof(Celula));
     lista->ultimo = lista->primeiro;
+    lista->primeiro->prox = NULL;
 }
 
 void insere_lista(TipoLista* lista,int adress, char* label){
   int tam;
 
-  lista->size++;
-  lista->ultimo->prox = (apontador)malloc(sizeof(TipoCelula)); //aloca celula
+  lista->ultimo->prox = (apontador)malloc(sizeof(Celula)); //aloca celula
   lista->ultimo = lista->ultimo->prox;
   tam = strlen(label);                                         //pega tamanho da label
   lista->ultimo->item.label = (char*)malloc(tam*sizeof(char)); //aloca vetor char para a label
   lista->ultimo->item.adress = adress;
-  lista->ultimo->item->label = *label;
+  strcpy(lista->ultimo->item.label,label);
   lista->ultimo->prox = NULL;
 }
 

@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "label.h"
 #include "DifInstruc.h"
+#include "regDecode.h"
+#include "opcode.h"
 
 char* DifInstruction(int flag, char* operandos,TipoLista* lista){
   if (flag == 0) {      //Zero(11)
@@ -16,13 +18,13 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     char* op;
     int aux;
     if(aux = pesquisa_lista(lista,operandos) != -1){
-      op = intToBin(aux,11);
+      op = IntToBinOP(aux,11);
       strcat(op,'\0');
       return op;
     }
     else {
       aux = atoi(operandos);
-      op = intToBin(aux,11);
+      op = IntToBinOP(aux,11);
       strcat(op,'\0');
       return op;
     }
@@ -37,14 +39,14 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     aux2 = strtok(NULL," \0;");
 
     if(aux = pesquisa_lista(lista,aux2) != -1){
-      aux2 = intToBin(aux,9);
+      aux2 = IntToBinOP(aux,9);
       strcat(op,aux2);
       strcat(op,'\0');
       return op;
     }
     else{
       aux = atoi(aux2);
-      aux2 = intToBin(aux,9);
+      aux2 = IntToBinOP(aux,9);
       strcat(op,aux2);
       strcat(op,"\0");
       return op;
@@ -59,13 +61,15 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
 
   else if (flag == 4) { //reg1(2)reg2(9(2 menos sig))
     char* aux;
-    aux = strtok(operandos,' ');
+    char* op;
+    char* aux2;
+    aux = strtok(operandos," ");
     op = decodeReg(aux,0);
-    aux = strtok(NULL,' \0;');
-    aux = decodeReg(aux,2);
+    aux = strtok(NULL," \0;");
+    aux2 = decodeReg(aux,2);
     strcat(op,aux2);
     strcat(op,'\0');
-    return op
+    return op;
   }
 }
 

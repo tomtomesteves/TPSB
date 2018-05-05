@@ -1,0 +1,8 @@
+load A1 sentinel
+load A2 one
+load A3 zero
+add A3 A2
+stop
+_one: .data 2 1
+_zero: .data 2 0
+_two: .data 2 2
