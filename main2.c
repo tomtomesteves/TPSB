@@ -8,9 +8,8 @@
 
 int main(int argc, char const *argv[]) {
 
-  TipoLista *lista;
-  inicializa_lista(lista);
-  printf("OIE\n" );
+  TipoLista lista;
+  inicializa_lista(&lista);
 
   FILE *in,*out;
   in = fopen("entrada.a","r");
@@ -22,40 +21,43 @@ int main(int argc, char const *argv[]) {
   //aux=(char *)malloc(50*sizeof(char));
 
 //PRIMEIRA PASSADA = PEGAR LABELS
+  while(fscanf(in,"%[^\n]",buf) != EOF){
+    printf("%s\n",buf );
 
-  while(fscanf(in,"%s",buf) != EOF){
-
-    if(strncmp(buf,"_",1)){                     //caso leia uma label
+    if(strncmp(buf,"_",1)==0){                     //caso leia uma label
       aux = buf + 1;                     //desconsidera o primeiro caracter
+      printf("%s\n",aux);
+
       label = strtok(aux,":");           //salva a label correspondente
       data = strtok(NULL," ");
-      if(!strcmp(data,".data")){         //caso seja uma linha de dados
+      if(strcmp(data,".data")==0){         //caso seja uma linha de dados
         data = strtok(NULL," ");
         data = strtok(NULL," \n;");
         constante = atoi(data);
-        insere_lista(lista,constante,label);
+        insere_lista(&lista,constante,label);
       }
       else
-        insere_lista(lista,PC,label);      //insere a label e seu endereço correspondente na lista de labels
+        insere_lista(&lista,PC,label);      //insere a label e seu endereço correspondente na lista de labels
       PC+=2;                             //incrementa o PC
     }
+    getc(in);
   }
 //SEGUNDA PASSADA = TRADUZIR PROGRAMA
   PC=0;                                   //reseta PC
   rewind(in);                             //reseta ponteiro do arquivo
-
-  while(fscanf(in,"%s",buf) != EOF){
-    if(strncmp(buf,";",1)){                     //caso NÃO leia um comentário
-      if(!strncmp(buf,"_",1)){                    //caso leia uma label, desconsidera o underscore
+  printf("oi\n");
+  while(fscanf(in,"%[^\n]",buf) != EOF){
+    if(strncmp(buf,";",1)!=0){                     //caso NÃO leia um comentário
+      if(strncmp(buf,"_",1)==0){                    //caso leia uma label, desconsidera o underscore
         aux = buf;
         data = strtok(aux," ");            //desconsidera a label
       }
       data = strtok(aux," ");            //pega a palavra seguinte à label
-      if(strcmp(data,".data")){          //CASO SEJA INSTRUÇÃO
+      if(strcmp(data,".data")!=0){          //CASO SEJA INSTRUÇÃO
         flag = opcodeDecode(data,opcode);//salva a flag da instrução em "flag" e armazena o opcode em "opcode"
         op = IntToBinOP(opcode);          //converte o opCode para binário
         data = strtok(NULL,";\n");       //salva em data todo o resto da linha, reg + reg ou reg + end
-        label = DifInstruction(flag,data,lista); //passa a flag e uma string contendo os 2 regs ou 1 reg + label
+        label = DifInstruction(flag,data,&lista); //passa a flag e uma string contendo os 2 regs ou 1 reg + label
         strcat(op,label);                //concatena o opcode com o restante da instrução
         fprintf(out,"%x: ",PC);
         strncpy(label,op,8);
@@ -66,6 +68,7 @@ int main(int argc, char const *argv[]) {
         PC++;
       }
     }
+    getc(in);
   }
 return 0;
 }
