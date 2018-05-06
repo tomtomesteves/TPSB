@@ -47,7 +47,6 @@ int main(int argc, char const *argv[]) {
 //SEGUNDA PASSADA = TRADUZIR PROGRAMA
   PC=0;                                   //reseta PC
   rewind(in);                             //reseta ponteiro do arquivo
-  printf("oi\n");
   while(fscanf(in,"%[^\n]",buf) != EOF){
     printf("%s\n",buf);
     if(strncmp(buf,";",1)!=0){                     //caso NÃO leia um comentário
@@ -62,13 +61,12 @@ int main(int argc, char const *argv[]) {
         op = IntToBinOP(&opcode);          //converte o opCode para binário
         data = strtok(NULL,";\n");       //salva em data todo o resto da linha, reg + reg ou reg + end
         label = DifInstruction(flag,data,&lista); //passa a flag e uma string contendo os 2 regs ou 1 reg + label
-        printf("SAIUU\n");
-        printf("label=%s\n",label);
+        printf("op = %s\n",op );
+        printf("operandos = %s\n",label);
         if(label != NULL)strcat(op,label);                //concatena o opcode com o restante da instrução
         printf("tudo=%s\n",op);
         printf("pc=%x: ",PC);
         strncpy(label,op,8);
-        printf("teste\n" );
         printf("label=%s\n",label);
         label = op + 8;
         fprintf(out,"%x: ",PC++);

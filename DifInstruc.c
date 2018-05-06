@@ -25,13 +25,11 @@ char *IntToBin(int n,int tamanho){
 }
 
 char* DifInstruction(int flag, char* operandos,TipoLista* lista){
-  printf("flag == %d\n",flag );
   if (flag == 0) {      //Zero(11)
     char* op;
     char aux[20];
     char* s = "00000000000";
     strcpy(aux,s);
-    printf("testeee\n" );
     strcat(s,"\0");
     op = s;
     return op;
@@ -59,25 +57,16 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     char aux3[20];
     int aux;
     op = strtok(operandos," ");
-    printf("op=%s\n",op);
     op = decodeReg(op,0);
-    printf("newop=%s\n",op);
     aux2 = strtok(NULL," \0;");
-    printf("aux2=%s\n",aux2);
 
     if(aux = pesquisa_lista(lista,aux2) != -1){
-      printf("entrei.aux=%d\n",aux);
       aux2 = IntToBin(aux,9);
-      printf("aux2=%s\n",aux2);
       strcpy(aux3,op);
-      printf("aux3=%s\n",aux3);
       strcat(aux3,aux2);
-      printf("aux3+aux2=%s\n",aux3);
       strcat(aux3,"\0");
-      printf("aux3=%s\n",aux3);
       op=NULL;
       op=aux3;
-      printf("op=%s\n",op);
       return op;
     }
     else{
@@ -91,9 +80,7 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
 
   else if (flag == 3) { //reg(11(2 menos sig))
     char* op;
-    printf("rwarw\n" );
     op = decodeReg(operandos,1);
-    printf("op == %s\n",op );
     return op;
   }
 
@@ -105,15 +92,10 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     aux = strtok(operandos," ");
     op = decodeReg(aux,0);
     strcpy(aux3,op);
-    printf("op == %s\n",op );
     aux = strtok(NULL," \0\n;");
-    printf("aux == %s\n",aux );
-    printf("%d\n",strlen(aux) );
     op = decodeReg(aux,2);
 
-    printf("aux == %s\n",aux );
     strcat(aux3,op);
-    printf("aux3 == %s\n",aux3 );
     strcat(aux3,"\0");
     op = aux3;
     return op;
