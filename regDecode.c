@@ -5,7 +5,8 @@
 
 
 char* decodeReg(char* reg,int n){
-  if(!strcmp(reg,"A0")){
+  printf("reg == %s\n",reg );
+  if(reg[1] == '0'){
     if(n == 0){
       return "00";
     }
@@ -16,7 +17,8 @@ char* decodeReg(char* reg,int n){
       return "000000000";
     }
   }
-  if(!strcmp(reg,"A1")){
+  if(reg[1] == '1'){
+    printf("aqui\n" );
     if(n == 0){
       return "01";
     }
@@ -27,7 +29,8 @@ char* decodeReg(char* reg,int n){
       return "000000001";
     }
   }
-  if(!strcmp(reg,"A2")){
+  if(reg[1] == '2'){
+
     if(n == 0){
       return "10";
     }
@@ -38,7 +41,7 @@ char* decodeReg(char* reg,int n){
       return "000000010";
     }
   }
-  if(!strcmp(reg,"A3")){
+  if(reg[1] == '3'){
     if(n == 0){
       return "11";
     }
@@ -49,4 +52,5 @@ char* decodeReg(char* reg,int n){
       return "000000011";
     }
   }
+  printf("oiasoasi\n" );
 }

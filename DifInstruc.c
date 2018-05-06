@@ -86,20 +86,31 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
 
   else if (flag == 3) { //reg(11(2 menos sig))
     char* op;
-    op = decodeReg(op,1);
+    printf("rwarw\n" );
+    op = decodeReg(operandos,1);
+    printf("op == %s\n",op );
     return op;
   }
 
   else if (flag == 4) { //reg1(2)reg2(9(2 menos sig))
-    char* aux;
+    char* aux = malloc(15*sizeof(char));
     char* op;
-    char* aux2;
+    char aux3[20];
+    //op = malloc(17*sizeof(char));
     aux = strtok(operandos," ");
     op = decodeReg(aux,0);
-    aux = strtok(NULL," \0;");
-    aux2 = decodeReg(aux,2);
-    strcat(op,aux2);
-    strcat(op,"\0");
+    strcpy(aux3,op);
+    printf("op == %s\n",op );
+    aux = strtok(NULL," \0\n;");
+    printf("aux == %s\n",aux );
+    printf("%d\n",strlen(aux) );
+    op = decodeReg(aux,2);
+
+    printf("aux == %s\n",aux );
+    strcat(aux3,op);
+    printf("aux3 == %s\n",aux3 );
+    strcat(aux3,"\0");
+    op = aux3;
     return op;
   }
 }
