@@ -15,7 +15,7 @@ int main(int argc, char const *argv[]) {
   in = fopen("entrada.a","r");
   out = fopen("saida.mif","w");
 
-  int PC=0,constante,opcode,flag;
+  int PC=0,constante,opcode,flag,i;
   char *aux,*data,*label,*buf,*op;
   buf=(char*)malloc(100*sizeof(int));
   //aux=(char *)malloc(50*sizeof(char));
@@ -66,11 +66,21 @@ int main(int argc, char const *argv[]) {
         if(label != NULL)strcat(op,label);                //concatena o opcode com o restante da instrução
         printf("tudo=%s\n",op);
         printf("pc=%x: ",PC);
-        strncpy(label,op,8);
-        printf("label=%s\n",label);
-        label = op + 8;
+        char* imprimir;
+        char* imprimir2;
+        imprimir = malloc(8*sizeof(char));
+        imprimir2 = malloc(8*sizeof(char));
+
+        for(i = 0; i<9;i++){
+          imprimir[i] = op[i];
+        }
         fprintf(out,"%x: ",PC++);
-        fprintf(out,"%s\n",label);
+        fprintf(out,"%s\n",imprimir);
+        for(i = 7; i<16;i++){
+          imprimir[i-7] = op[i];
+        }
+        fprintf(out,"%x: ",PC++);
+        fprintf(out,"%s\n",imprimir);
         PC++;
       }
     }
