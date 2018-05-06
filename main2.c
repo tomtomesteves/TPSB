@@ -15,7 +15,7 @@ int main(int argc, char const *argv[]) {
   in = fopen("entrada.a","r");
   out = fopen("saida.mif","w");
 
-  int PC=0,constante,opcode,flag,i;
+  int PC=0,constante,opcode,flag,i,j;
   char *aux,*data,*label,*buf,*op;
   buf=(char*)malloc(100*sizeof(int));
   //aux=(char *)malloc(50*sizeof(char));
@@ -56,19 +56,18 @@ int main(int argc, char const *argv[]) {
 
   while(fscanf(in,"%[^\n]",buf) != EOF){
     printf("%s\n",buf);
-    if(strncmp(buf,";",1)!=0){                     //caso NÃO leia um comentário
-      if(strncmp(buf,"_",1)==0){                    //caso leia uma label, desconsidera o underscore
+    if(strncmp(buf,";",1)!=0){
+      if(strncmp(buf,"_",1)==0){
+        printf("tsteafszd\n" );                  //caso leia uma label, desconsidera o underscore
+        data = strtok(buf,":");            //desconsidera a label
+        data = strtok(NULL," ");
+      }
+      else {
         data = strtok(buf," ");            //desconsidera a label
+
       }
-      i = 0;
-      if(buf[0] == '_'){
-        while (buf[i] != ':') {
-          i++;
-        }
-        buf = &buf[i];
-      }
-      printf("novamente =%s\n",buf);
-      data = strtok(buf," ");            //pega a palavra seguinte à label
+      printf("novamente =%s\n",data);
+      //data = strtok(buf," ");            //pega a palavra seguinte à label
       if(strcmp(data,".data")!=0){          //CASO SEJA INSTRUÇÃO
         flag = opcodeDecode(data,&opcode);//salva a flag da instrução em "flag" e armazena o opcode em "opcode"
         printf("flag=%d //// opcode=%d\n",flag,opcode);
@@ -78,24 +77,25 @@ int main(int argc, char const *argv[]) {
         printf("op = %s\n",op );
         printf("operandos = %s\n",label);
         if(label != NULL)strcat(op,label);                //concatena o opcode com o restante da instrução
-        printf("tudo=%s\n",op);
-        printf("pc=%x: ",PC);
+        printf("        tudo=%s\n",op);
+        printf("pc=%x: \n",PC);
         char* imprimir;
         char* imprimir2;
         imprimir = malloc(8*sizeof(char));
         imprimir2 = malloc(8*sizeof(char));
-        if (buf[0]!= '_') {
           for(i = 0; i<8;i++){
             imprimir[i] = op[i];
+            printf("%c ",imprimir[i] );
           }
           fprintf(out,"%02X: ",PC++);
           fprintf(out,"%s\n",imprimir);
-          for(i = 8; i<15;i++){
-            imprimir[i-8] = op[i];
+          j = 0;
+          for(i = 8; i<16;i++){
+            imprimir2[j] = op[i];
+            j++;
           }
           fprintf(out,"%02X: ",PC++);
-          fprintf(out,"%s\n",imprimir);
-        }
+          fprintf(out,"%s\n",imprimir2);
 
       }
     }

@@ -56,7 +56,9 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     char* aux2;
     char aux3[20];
     int aux;
+    printf("operandos %s\n",operandos );
     op = strtok(operandos," ");
+    printf("op == %s\n",op );
     op = decodeReg(op,0);
     aux2 = strtok(NULL," \0;");
 
