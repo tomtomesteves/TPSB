@@ -1,7 +1,8 @@
-load A1 two
-load A2 one
+_init:load A1 two
+     load A2 one
 load A3 zero
 add A3 A2
+jump init
 stop
 _one: .data 2 1
 _zero: .data 2 0

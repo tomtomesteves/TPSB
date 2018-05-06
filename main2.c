@@ -22,6 +22,9 @@ int main(int argc, char const *argv[]) {
 
 //PRIMEIRA PASSADA = PEGAR LABELS
   while(fscanf(in,"%[^\n]",buf) != EOF){
+    while (buf[i] == ' ') {
+      i++;
+    }
     printf("%s\n",buf );
 
     if(strncmp(buf,"_",1)==0){                     //caso leia uma label
@@ -34,10 +37,12 @@ int main(int argc, char const *argv[]) {
         data = strtok(NULL," ");
         data = strtok(NULL," \n;");
         constante = atoi(data);
-        insere_lista(&lista,constante,label);
+        insere_lista(&lista,PC,label);
       }
       else
         insere_lista(&lista,PC,label);      //insere a label e seu endereço correspondente na lista de labels
+    }
+    if (buf[i] != ';') {
       PC+=2;                             //incrementa o PC
     }
     getc(in);
@@ -54,6 +59,13 @@ int main(int argc, char const *argv[]) {
     if(strncmp(buf,";",1)!=0){                     //caso NÃO leia um comentário
       if(strncmp(buf,"_",1)==0){                    //caso leia uma label, desconsidera o underscore
         data = strtok(buf," ");            //desconsidera a label
+      }
+      i = 0;
+      if(buf[0] == '_'){
+        while (buf[i] != ':') {
+          i++;
+        }
+        buf = &buf[i];
       }
       printf("novamente =%s\n",buf);
       data = strtok(buf," ");            //pega a palavra seguinte à label
@@ -83,7 +95,6 @@ int main(int argc, char const *argv[]) {
           }
           fprintf(out,"%02X: ",PC++);
           fprintf(out,"%s\n",imprimir);
-
         }
 
       }
