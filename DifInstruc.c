@@ -25,11 +25,16 @@ char *IntToBin(int n,int tamanho){
 }
 
 char* DifInstruction(int flag, char* operandos,TipoLista* lista){
+  printf("flag == %d\n",flag );
   if (flag == 0) {      //Zero(11)
-    char* s;
-    strcpy(s,"00000000000");
+    char* op;
+    char aux[20];
+    char* s = "00000000000";
+    strcpy(aux,s);
+    printf("testeee\n" );
     strcat(s,"\0");
-    return s;
+    op = s;
+    return op;
   }
 
   else if (flag == 1) { //Endereco(11(9 menos sig))

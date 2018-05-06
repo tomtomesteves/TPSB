@@ -58,16 +58,17 @@ int main(int argc, char const *argv[]) {
       data = strtok(buf," ");            //pega a palavra seguinte à label
       if(strcmp(data,".data")!=0){          //CASO SEJA INSTRUÇÃO
         flag = opcodeDecode(data,&opcode);//salva a flag da instrução em "flag" e armazena o opcode em "opcode"
-        printf("flag=%d\nopcode=%d\n",flag,opcode);
+        printf("flag=%d //// opcode=%d\n",flag,opcode);
         op = IntToBinOP(&opcode);          //converte o opCode para binário
         data = strtok(NULL,";\n");       //salva em data todo o resto da linha, reg + reg ou reg + end
         label = DifInstruction(flag,data,&lista); //passa a flag e uma string contendo os 2 regs ou 1 reg + label
         printf("SAIUU\n");
         printf("label=%s\n",label);
-        strcat(op,label);                //concatena o opcode com o restante da instrução
+        if(label != NULL)strcat(op,label);                //concatena o opcode com o restante da instrução
         printf("tudo=%s\n",op);
         printf("pc=%x: ",PC);
         strncpy(label,op,8);
+        printf("teste\n" );
         printf("label=%s\n",label);
         label = op + 8;
         fprintf(out,"%x: ",PC++);
