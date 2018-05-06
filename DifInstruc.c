@@ -10,10 +10,10 @@ char *IntToBin(int n,int tamanho){
   int c, d, count;
   char *pointer;
   count = 0;
-  pointer = (char*)malloc(tamanho+1);
+  pointer = (char*)malloc(tamanho);
   if (pointer == NULL)
     exit(EXIT_FAILURE);
-  for (c = tamanho ; c >= 0 ; c--){
+  for (c = tamanho-1 ; c >= 0 ; c--){
     d = n >> c;
     if (d & 1)
       *(pointer+count) = 1 + '0';
@@ -61,8 +61,11 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     printf("op == %s\n",op );
     op = decodeReg(op,0);
     aux2 = strtok(NULL," \0;");
-
-    if(aux = pesquisa_lista(lista,aux2) != -1){
+    printf("aux2 == %s\n",aux2 );
+    if(pesquisa_lista(lista,aux2) != -1){
+      printf("pesquisando lista\n" );
+      aux = pesquisa_lista(lista,aux2);
+      printf("aux == %d\n",aux );
       aux2 = IntToBin(aux,9);
       strcpy(aux3,op);
       strcat(aux3,aux2);
