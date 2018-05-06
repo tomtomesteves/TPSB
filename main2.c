@@ -47,6 +47,8 @@ int main(int argc, char const *argv[]) {
 //SEGUNDA PASSADA = TRADUZIR PROGRAMA
   PC=0;                                   //reseta PC
   rewind(in);                             //reseta ponteiro do arquivo
+  fprintf(out,"DEPTH = 128;\nWIDTH = 8;\nADDRESS_RADIX = HEX;\nDATA_RADIX = BIN;\nCONTENT\nBEGIN\n\n");
+
   while(fscanf(in,"%[^\n]",buf) != EOF){
     printf("%s\n",buf);
     if(strncmp(buf,";",1)!=0){                     //caso NÃO leia um comentário
@@ -70,21 +72,25 @@ int main(int argc, char const *argv[]) {
         char* imprimir2;
         imprimir = malloc(8*sizeof(char));
         imprimir2 = malloc(8*sizeof(char));
+        if (buf[0]!= '_') {
+          for(i = 0; i<8;i++){
+            imprimir[i] = op[i];
+          }
+          fprintf(out,"%02X: ",PC++);
+          fprintf(out,"%s\n",imprimir);
+          for(i = 8; i<15;i++){
+            imprimir[i-8] = op[i];
+          }
+          fprintf(out,"%02X: ",PC++);
+          fprintf(out,"%s\n",imprimir);
 
-        for(i = 0; i<9;i++){
-          imprimir[i] = op[i];
         }
-        fprintf(out,"%x: ",PC++);
-        fprintf(out,"%s\n",imprimir);
-        for(i = 7; i<16;i++){
-          imprimir[i-7] = op[i];
-        }
-        fprintf(out,"%x: ",PC++);
-        fprintf(out,"%s\n",imprimir);
-        PC++;
+
       }
     }
     getc(in);
   }
+  fprintf(out,"[%02X..7F]: 00000000;\nEND;",PC++);
+
 return 0;
 }

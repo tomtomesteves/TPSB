@@ -1,4 +1,4 @@
-load A1 sentinel
+load A1 two
 load A2 one
 load A3 zero
 add A3 A2
