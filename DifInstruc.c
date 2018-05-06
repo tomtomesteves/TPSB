@@ -6,6 +6,24 @@
 #include "regDecode.h"
 #include "opcode.h"
 
+char *IntToBin(int n,int tamanho){
+  int c, d, count;
+  char *pointer;
+  count = 0;
+  pointer = (char*)malloc(tamanho+1);
+  if (pointer == NULL)
+    exit(EXIT_FAILURE);
+  for (c = tamanho ; c >= 0 ; c--){
+    d = n >> c;
+    if (d & 1)
+      *(pointer+count) = 1 + '0';
+    else
+      *(pointer+count) = 0 + '0';
+    count++;
+  }
+  return  pointer;
+}
+
 char* DifInstruction(int flag, char* operandos,TipoLista* lista){
   if (flag == 0) {      //Zero(11)
     char* s;
@@ -18,13 +36,13 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     char* op;
     int aux;
     if(aux = pesquisa_lista(lista,operandos) != -1){
-      op = IntToBinOP(&aux);
+      op = IntToBin(aux,9);
       strcat(op,"\0");
       return op;
     }
     else {
       aux = atoi(operandos);
-      op = IntToBinOP(&aux);
+      op = IntToBin(aux,9);
       strcat(op,"\0");
       return op;
     }
@@ -44,7 +62,7 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
 
     if(aux = pesquisa_lista(lista,aux2) != -1){
       printf("entrei.aux=%d\n",aux);
-      aux2 = IntToBinOP(&aux);
+      aux2 = IntToBin(aux,9);
       printf("aux2=%s\n",aux2);
       strcpy(aux3,op);
       printf("aux3=%s\n",aux3);
@@ -57,7 +75,7 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     }
     else{
       aux = atoi(aux2);
-      aux2 = IntToBinOP(&aux);
+      aux2 = IntToBin(aux,9);
       strcat(op,aux2);
       strcat(op,"\0");
       return op;
@@ -82,23 +100,4 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     strcat(op,"\0");
     return op;
   }
-}
-
-
-char *IntToBin(int n,int tamanho){
-  int c, d, count;
-  char *pointer;
-  count = 0;
-  pointer = (char*)malloc(tamanho+1);
-  if (pointer == NULL)
-    exit(EXIT_FAILURE);
-  for (c = tamanho ; c >= 0 ; c--){
-    d = n >> c;
-    if (d & 1)
-      *(pointer+count) = 1 + '0';
-    else
-      *(pointer+count) = 0 + '0';
-    count++;
-  }
-  return  pointer;
 }

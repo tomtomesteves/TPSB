@@ -5,4 +5,7 @@
 // recebe apenas os capos dos oprandos sem o primeiro espaco
 char* DifInstruction(int flag, char* operandos,TipoLista *lista);
 
+char *IntToBin(int n,int tamanho);
+
+
 #endif
