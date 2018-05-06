@@ -64,9 +64,10 @@ int main(int argc, char const *argv[]) {
         label = DifInstruction(flag,data,&lista); //passa a flag e uma string contendo os 2 regs ou 1 reg + label
         printf("label=%s\n",label);
         strcat(op,label);                //concatena o opcode com o restante da instrução
-        fprintf(out,"%x: ",PC);
+        printf("tudo=%s\n",op);
+        printf("pc=%x: ",PC);
         strncpy(label,op,8);
-        fprintf(out,"%s\n",label);
+        printf("label=%s\n",label);
         label = op + 8;
         fprintf(out,"%x: ",PC++);
         fprintf(out,"%s\n",label);

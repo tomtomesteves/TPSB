@@ -49,7 +49,7 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
   }
 
   else if (flag == 2) { //reg(2)endereço(9)
-    char* op;
+    char* op = malloc(15*sizeof(char));
     char* aux2;
     char aux3[20];
     int aux;
@@ -67,10 +67,12 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
       strcpy(aux3,op);
       printf("aux3=%s\n",aux3);
       strcat(aux3,aux2);
-      printf("op+aux2=%s\n",aux3);
+      printf("aux3+aux2=%s\n",aux3);
       strcat(aux3,"\0");
       printf("aux3=%s\n",aux3);
-      strcpy(op,aux3);
+      op=NULL;
+      op=aux3;
+      printf("op=%s\n",op);
       return op;
     }
     else{
