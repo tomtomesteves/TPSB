@@ -6,94 +6,94 @@
 
 
 int opcodeDecode(char* instruction,int *aux){
-  if(!strcmp(instruction,      "stop")){
+  if(0==strcmp(instruction,"stop")){
     return 0;
   }
-  else if(!strcmp(instruction, "load")){
+  else if(0==strcmp(instruction, "load")){
     *aux = 1;
     return 2;
   }
-  else if(!strcmp(instruction, "store")){
+  else if(0==strcmp(instruction, "store")){
     *aux = 2;
     return 2;
   }
-  else if(!strcmp(instruction, "read")){
+  else if(0==strcmp(instruction, "read")){
     *aux =  3;
     return 3;
   }
-  else if(!strcmp(instruction, "write")){
+  else if(0==strcmp(instruction, "write")){
     *aux = 4;
     return 3;
   }
-  else if(!strcmp(instruction, "add")) {
+  else if(0==strcmp(instruction, "add")) {
     *aux = 5;
     return 4;
   }
-  else if(!strcmp(instruction, "subtract")) {
+  else if(0==strcmp(instruction, "subtract")) {
     *aux = 6;
     return 4;
   }
-  else if(!strcmp(instruction, "multiply")) {
+  else if(0==strcmp(instruction, "multiply")) {
     *aux = 7;
     return 4;
   }
-  else if(!strcmp(instruction, "divide")) {
+  else if(0==strcmp(instruction, "divide")) {
     *aux = 8;
     return 4;
   }
-  else if(!strcmp(instruction, "jump")) {
+  else if(0==strcmp(instruction, "jump")) {
     *aux = 9;
     return 1;
   }
-  else if(!strcmp(instruction, "jmpz")) {
+  else if(0==strcmp(instruction, "jmpz")) {
     *aux = 10;
     return 2;
   }
-  else if(!strcmp(instruction, "jmpn")) {
+  else if(0==strcmp(instruction, "jmpn")) {
     *aux = 11;
     return 2;
   }
-  else if(!strcmp(instruction, "move")) {
+  else if(0==strcmp(instruction, "move")) {
     *aux = 12;
     return 4;
   }
-  else if(!strcmp(instruction, "push")) {
+  else if(0==strcmp(instruction, "push")) {
     *aux = 13;
     return 3;
   }
-  else if(!strcmp(instruction, "pop"))      {
+  else if(0==strcmp(instruction, "pop"))      {
     *aux = 14;
     return 3;
   }
-  else if(!strcmp(instruction, "call"))     {
+  else if(0==strcmp(instruction, "call"))     {
     *aux = 15;
     return 1;
   }
-  else if(!strcmp(instruction, "return"))   {
+  else if(0==strcmp(instruction, "return"))   {
     *aux = 32768;
     return 0;
   }
-  else if(!strcmp(instruction, "load_s"))   {
+  else if(0==strcmp(instruction, "load_s"))   {
     *aux = 17;
     return 2;
   }
-  else if(!strcmp(instruction, "store_s"))  {
+  else if(0==strcmp(instruction, "store_s"))  {
     *aux = 18;
     return 2;
   }
-  else if(!strcmp(instruction, "loadc"))    {
+  else if(0==strcmp(instruction, "loadc"))    {
     *aux = 19;
     return 2;
   }
-  else if(!strcmp(instruction, "loadi"))    {
+  else if(0==strcmp(instruction, "loadi"))    {
     *aux = 20;
     return 4;
   }
-  else if(!strcmp(instruction, "storei"))   {
+  else if(0==strcmp(instruction, "storei"))   {
     *aux = 21;
     return 4;
   }
-  else if(!strcmp(instruction, "copytop"))  {
+  else if(0==strcmp(instruction, "copytop"))  {
     *aux = 22;
     return 3;
   }

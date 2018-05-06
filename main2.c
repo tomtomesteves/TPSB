@@ -15,7 +15,7 @@ int main(int argc, char const *argv[]) {
   in = fopen("entrada.a","r");
   out = fopen("saida.mif","w");
 
-  int PC=0,constante,*opcode,flag;
+  int PC=0,constante,opcode,flag;
   char *aux,*data,*label,*buf,*op;
   buf=(char*)malloc(100*sizeof(int));
   //aux=(char *)malloc(50*sizeof(char));
@@ -26,7 +26,7 @@ int main(int argc, char const *argv[]) {
 
     if(strncmp(buf,"_",1)==0){                     //caso leia uma label
       aux = buf + 1;                     //desconsidera o primeiro caracter
-      printf("%s\n",aux);
+      printf("sem label = %s\n",aux);
 
       label = strtok(aux,":");           //salva a label correspondente
       data = strtok(NULL," ");
@@ -42,22 +42,27 @@ int main(int argc, char const *argv[]) {
     }
     getc(in);
   }
+  printf("\n\nIMPRIMINDO A LISTA\n\n");
+  imprime_lista(&lista);
 //SEGUNDA PASSADA = TRADUZIR PROGRAMA
   PC=0;                                   //reseta PC
   rewind(in);                             //reseta ponteiro do arquivo
   printf("oi\n");
   while(fscanf(in,"%[^\n]",buf) != EOF){
+    printf("%s\n",buf);
     if(strncmp(buf,";",1)!=0){                     //caso NÃO leia um comentário
       if(strncmp(buf,"_",1)==0){                    //caso leia uma label, desconsidera o underscore
-        aux = buf;
-        data = strtok(aux," ");            //desconsidera a label
+        data = strtok(buf," ");            //desconsidera a label
       }
-      data = strtok(aux," ");            //pega a palavra seguinte à label
+      printf("novamente =%s\n",buf);
+      data = strtok(buf," ");            //pega a palavra seguinte à label
       if(strcmp(data,".data")!=0){          //CASO SEJA INSTRUÇÃO
-        flag = opcodeDecode(data,opcode);//salva a flag da instrução em "flag" e armazena o opcode em "opcode"
-        op = IntToBinOP(opcode);          //converte o opCode para binário
+        flag = opcodeDecode(data,&opcode);//salva a flag da instrução em "flag" e armazena o opcode em "opcode"
+        printf("flag=%d\nopcode=%d\n",flag,opcode);
+        op = IntToBinOP(&opcode);          //converte o opCode para binário
         data = strtok(NULL,";\n");       //salva em data todo o resto da linha, reg + reg ou reg + end
         label = DifInstruction(flag,data,&lista); //passa a flag e uma string contendo os 2 regs ou 1 reg + label
+        printf("label=%s\n",label);
         strcat(op,label);                //concatena o opcode com o restante da instrução
         fprintf(out,"%x: ",PC);
         strncpy(label,op,8);

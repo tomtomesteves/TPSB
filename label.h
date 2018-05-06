@@ -29,4 +29,6 @@ int pesquisa_lista(TipoLista *lista,char* label);
 //Desaloca os elementos da lista
 void free_lista(TipoLista* lista);
 
+void imprime_lista(TipoLista *lista);
+
 #endif

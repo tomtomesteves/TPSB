@@ -18,14 +18,14 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     char* op;
     int aux;
     if(aux = pesquisa_lista(lista,operandos) != -1){
-      op = IntToBinOP(aux,11);
-      strcat(op,'\0');
+      op = IntToBinOP(&aux);
+      strcat(op,"\0");
       return op;
     }
     else {
       aux = atoi(operandos);
-      op = IntToBinOP(aux,11);
-      strcat(op,'\0');
+      op = IntToBinOP(&aux);
+      strcat(op,"\0");
       return op;
     }
   }
@@ -33,20 +33,31 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
   else if (flag == 2) { //reg(2)endereço(9)
     char* op;
     char* aux2;
+    char aux3[20];
     int aux;
     op = strtok(operandos," ");
+    printf("op=%s\n",op);
     op = decodeReg(op,0);
+    printf("newop=%s\n",op);
     aux2 = strtok(NULL," \0;");
+    printf("aux2=%s\n",aux2);
 
     if(aux = pesquisa_lista(lista,aux2) != -1){
-      aux2 = IntToBinOP(aux,9);
-      strcat(op,aux2);
-      strcat(op,'\0');
+      printf("entrei.aux=%d\n",aux);
+      aux2 = IntToBinOP(&aux);
+      printf("aux2=%s\n",aux2);
+      strcpy(aux3,op);
+      printf("aux3=%s\n",aux3);
+      strcat(aux3,aux2);
+      printf("op+aux2=%s\n",aux3);
+      strcat(aux3,"\0");
+      printf("aux3=%s\n",aux3);
+      strcpy(op,aux3);
       return op;
     }
     else{
       aux = atoi(aux2);
-      aux2 = IntToBinOP(aux,9);
+      aux2 = IntToBinOP(&aux);
       strcat(op,aux2);
       strcat(op,"\0");
       return op;
@@ -68,7 +79,7 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista){
     aux = strtok(NULL," \0;");
     aux2 = decodeReg(aux,2);
     strcat(op,aux2);
-    strcat(op,'\0');
+    strcat(op,"\0");
     return op;
   }
 }

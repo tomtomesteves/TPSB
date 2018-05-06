@@ -42,3 +42,11 @@ void free_lista(TipoLista* lista){
     free(aux2);             //free na célula
   }
 }
+
+void imprime_lista(TipoLista *lista){
+  apontador aux = lista->primeiro->prox;
+  while(aux!=NULL){
+    printf("label=%s\nendereço=%d\n",aux->item.label,aux->item.adress);
+    aux=aux->prox;
+  }      
+}
