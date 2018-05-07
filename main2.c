@@ -6,6 +6,30 @@
 #include "regDecode.h"
 #include "opcode.h"
 
+char *binario(int n,int tamanho,int len){
+  int c, d, count;
+  char *pointer;
+  count = 0;
+  pointer = (char*)malloc(tamanho+1);
+  if (pointer == NULL)
+    exit(EXIT_FAILURE);
+  for (c = tamanho-2 ; c >= 0 ; c--){
+    d = n >> c;
+    if (c > len) {
+      *(pointer+count) = 0 + '0';
+    }
+    else {
+      if (d & 1)
+      *(pointer+count) = 1 + '0';
+      else
+      *(pointer+count) = 0 + '0';
+    }
+    count++;
+  }
+  return pointer;
+}
+
+
 int main(int argc, char const *argv[]) {
 
   TipoLista lista;
@@ -33,15 +57,15 @@ int main(int argc, char const *argv[]) {
       data = strtok(NULL," ");
       if(strcmp(data,".data")==0){         //caso seja uma linha de dados
         data = strtok(NULL," ");
-        data = strtok(NULL," \n;");
         constante = atoi(data);
+        data = strtok(NULL," \n;");
         insere_lista(&lista,PC,label);
+        PC+= constante;
       }
-      else
+      else{
         insere_lista(&lista,PC,label);      //insere a label e seu endereço correspondente na lista de labels
-    }
-    if (buf[i] != ';') {
-      PC+=2;                             //incrementa o PC
+        PC+=2;                             //incrementa o PC
+      }
     }
     getc(in);
   }
@@ -92,6 +116,31 @@ int main(int argc, char const *argv[]) {
           }
           fprintf(out,"%02X: ",PC++);
           fprintf(out,"%s\n",imprimir2);
+      }
+      else{
+
+        int Daniel;
+        int Carlos;
+        char* bytes;
+        char* numero;
+        char* bin;
+        bytes = strtok(NULL," ");
+        numero = strtok(NULL," \n;");
+        Daniel = atoi(bytes);
+        bin = malloc(Daniel*8*sizeof(char));
+        Carlos = atoi(numero);
+        bin = binario(Carlos,(Daniel*8)+1,strlen(numero));
+        char* imprimir3;
+        imprimir3 = malloc(9*sizeof(char));
+        printf("bin === %s\n",bin );
+        while (Daniel) {
+          snprintf(imprimir3,9,"%s",bin);
+          printf("saidaa %s\n",imprimir3 );
+          fprintf(out,"%02X: ",PC++);
+          fprintf(out,"%s\n",imprimir3);
+          bin +=8;
+          Daniel--;
+        }
       }
     }
     getc(in);
