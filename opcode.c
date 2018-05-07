@@ -6,7 +6,7 @@
 
 
 int opcodeDecode(char* instruction,int *aux){
-  if(5<strcmp(instruction,"stop")){
+  if(!strcmp(instruction,"stop")){
     printf("ta aqui do stop\n" );
     *aux = 0;
     return 0;

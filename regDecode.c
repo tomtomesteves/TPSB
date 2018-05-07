@@ -42,6 +42,7 @@ char* decodeReg(char* reg,int n){
     }
   }
   if(reg[1] == '3'){
+    printf("teste\n" );
     if(n == 0){
       return "11";
     }

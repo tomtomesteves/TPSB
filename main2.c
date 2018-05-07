@@ -71,7 +71,7 @@ int main(int argc, char const *argv[]) {
         printf("flag=%d //// opcode=%d\n",flag,opcode);
         op = IntToBinOP(&opcode);          //converte o opCode para binário
         data = strtok(NULL,";\n");       //salva em data todo o resto da linha, reg + reg ou reg + end
-        label = DifInstruction(flag,data,&lista); //passa a flag e uma string contendo os 2 regs ou 1 reg + label
+        DifInstruction(flag,data,&lista,label); //passa a flag e uma string contendo os 2 regs ou 1 reg + label
         printf("op = %s\n",op );
         printf("operandos = %s\n",label);
         if(label != NULL)strcat(op,label);                //concatena o opcode com o restante da instrução
