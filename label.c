@@ -25,10 +25,12 @@ int pesquisa_lista(TipoLista* lista,char* label){
     int flag=-1; //enquanto igual a -1, label não reconhecida
     apontador aux; //ponteiro para percorrer a lista
     aux = lista->primeiro->prox;
-    while(aux!=NULL && !strcmp(label,aux->item.label)) //enquanto nao acabar a lista e nao encontrar a label
+    while(aux!=NULL && strcmp(label,aux->item.label)!=0) //enquanto nao acabar a lista e nao encontrar a label
       aux=aux->prox;
-    if(aux!=NULL)//se saiu do while, verifica se foi por encontrar ou por terminar a lista
+    if(aux!=NULL){//se saiu do while, verifica se foi por encontrar ou por terminar a lista
+      printf("VOU RETORNAR ISSO:%d\n",aux->item.adress);
       return(aux->item.adress); //retorna o endereço acossiado a label caso tenha saido do while por ter enncontrado
+    }
     return flag;
 }
 
@@ -48,5 +50,5 @@ void imprime_lista(TipoLista *lista){
   while(aux!=NULL){
     printf("label=%s\nendereço=%d\n",aux->item.label,aux->item.adress);
     aux=aux->prox;
-  }      
+  }
 }
