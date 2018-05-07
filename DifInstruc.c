@@ -33,7 +33,6 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista, char* label){
     strcat(s,"\0");
     op = s;
     sprintf(label,"%s",op);
-    printf("labellll  %s\n",label );
   }
 
   else if (flag == 1) { //Endereco(11(9 menos sig))
@@ -44,7 +43,6 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista, char* label){
       op = IntToBin(aux,11);
       strcat(op,"\0");
       sprintf(label,"%s",op);
-      printf("aquiilabellll  %s\n",label );
 
     }
     else {
@@ -52,8 +50,6 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista, char* label){
       op = IntToBin(aux,9);
       strcat(op,"\0");
       sprintf(label,"%s",op);
-      printf("labellll  %s\n",label );
-
     }
   }
 
@@ -62,16 +58,11 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista, char* label){
     char* aux2;
     char aux3[20];
     int aux;
-    printf("operandos %s\n",operandos );
     op = strtok(operandos," ");
-    printf("op == %s\n",op );
     op = decodeReg(op,0);
     aux2 = strtok(NULL," \0;");
-    printf("aux2 == %s\n",aux2 );
     if(pesquisa_lista(lista,aux2) != -1){
-      printf("pesquisando lista\n" );
       aux = pesquisa_lista(lista,aux2);
-      printf("aux == %d\n",aux );
       aux2 = IntToBin(aux,9);
       strcpy(aux3,op);
       strcat(aux3,aux2);
@@ -86,8 +77,6 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista, char* label){
       strcat(op,aux2);
       strcat(op,"\0");
       sprintf(label,"%s",op);
-      printf("labellll  %s\n",label );
-
     }
   }
 
@@ -104,17 +93,13 @@ char* DifInstruction(int flag, char* operandos,TipoLista* lista, char* label){
     //op = malloc(17*sizeof(char));
     aux = strtok(operandos," ");
     op = decodeReg(aux,0);
-    printf("              op ===   %s\n",op );
     strcpy(aux3,op);
     aux = strtok(NULL," \0\n;");
-    printf("aux %s\n",aux );
     op = decodeReg(aux,2);
-    printf("              op == %s\n",op );
     strcat(aux3,op);
     strcat(aux3,"\0");
     op = NULL;
     op = aux3;
-    printf("retorna ------- %s\n",op );
     sprintf(label,"%s",op);
   }
 }

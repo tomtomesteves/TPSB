@@ -5,7 +5,6 @@
 
 
 char* decodeReg(char* reg,int n){
-  printf("reg == %s\n",reg );
   if(reg[1] == '0'){
     if(n == 0){
       return "00";
@@ -18,7 +17,6 @@ char* decodeReg(char* reg,int n){
     }
   }
   if(reg[1] == '1'){
-    printf("aqui\n" );
     if(n == 0){
       return "01";
     }
@@ -42,7 +40,6 @@ char* decodeReg(char* reg,int n){
     }
   }
   if(reg[1] == '3'){
-    printf("teste\n" );
     if(n == 0){
       return "11";
     }
@@ -53,5 +50,4 @@ char* decodeReg(char* reg,int n){
       return "000000011";
     }
   }
-  printf("oiasoasi\n" );
 }

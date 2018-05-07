@@ -7,7 +7,6 @@
 
 int opcodeDecode(char* instruction,int *aux){
   if(!strcmp(instruction,"stop")){
-    printf("ta aqui do stop\n" );
     *aux = 0;
     return 0;
   }
@@ -72,7 +71,7 @@ int opcodeDecode(char* instruction,int *aux){
     return 1;
   }
   else if(0==strcmp(instruction, "return"))   {
-    *aux = 32768;
+    *aux = 16;
     return 0;
   }
   else if(0==strcmp(instruction, "load_s"))   {
