@@ -4,7 +4,9 @@ load A3 zero
 add A3 A1
 push A3
 pop A3
+call vai
 stop
+_vai: return
 _one: .data 2 1
 _zero: .data 2 0
 _two: .data 2 3

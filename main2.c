@@ -42,7 +42,6 @@ int main(int argc, char const *argv[]) {
   int PC=0,constante,opcode,flag,i,j;
   char *aux,*data,*label,*buf,*op;
   buf=(char*)malloc(100*sizeof(int));
-  //aux=(char *)malloc(50*sizeof(char));
 
 //PRIMEIRA PASSADA = PEGAR LABELS
   while(fscanf(in,"%[^\n]",buf) != EOF){
@@ -73,8 +72,9 @@ int main(int argc, char const *argv[]) {
   PC=0;                                   //reseta PC
   rewind(in);                             //reseta ponteiro do arquivo
   fprintf(out,"DEPTH = 128;\nWIDTH = 8;\nADDRESS_RADIX = HEX;\nDATA_RADIX = BIN;\nCONTENT\nBEGIN\n\n");
-
   while(fscanf(in,"%[^\n]",buf) != EOF){
+    char* c = malloc(50*sizeof(char));
+    strcpy(c,buf);
     if(strncmp(buf,";",1)!=0){
       if(strncmp(buf,"_",1)==0){
         data = strtok(buf,":");            //desconsidera a label
@@ -82,9 +82,7 @@ int main(int argc, char const *argv[]) {
       }
       else {
         data = strtok(buf," ");            //desconsidera a label
-
       }
-      //data = strtok(buf," ");            //pega a palavra seguinte à label
       if(strcmp(data,".data")!=0){          //CASO SEJA INSTRUÇÃO
         flag = opcodeDecode(data,&opcode);//salva a flag da instrução em "flag" e armazena o opcode em "opcode"
         op = IntToBinOP(&opcode);          //converte o opCode para binário
@@ -99,7 +97,7 @@ int main(int argc, char const *argv[]) {
             imprimir[i] = op[i];
           }
           fprintf(out,"%02X: ",PC++);
-          fprintf(out,"%s ;\n",imprimir);
+          fprintf(out,"%s ; -- %s\n",imprimir,c);
           j = 0;
           for(i = 8; i<16;i++){
             imprimir2[j] = op[i];
